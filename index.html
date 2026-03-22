@@ -46,7 +46,6 @@ button {
   overflow: hidden;
 }
 
-/* PHOTO STYLE */
 img.main {
   width: 180px;
   height: 180px;
@@ -62,14 +61,13 @@ img.main {
   to { box-shadow: 0 0 25px #ff4d6d; }
 }
 
-.message {
+.message-line {
   font-size: 20px;
   color: #ff4d6d;
-  padding: 10px;
-  background: #ffffffaa;
-  border-radius: 15px;
-  margin-top: 10px;
-  animation: fadeIn 2s ease-in;
+  margin: 8px 0;
+  opacity: 0;
+  transform: translateY(20px);
+  transition: 0.8s;
 }
 
 .highlight {
@@ -78,25 +76,8 @@ img.main {
   font-size: 22px;
 }
 
-.decor img {
-  width: 60px;
-  margin: 5px;
-}
-
-.card {
-  background: #ffffffcc;
-  padding: 10px;
-  margin: 6px;
-  border-radius: 15px;
-  opacity: 0;
-  transform: scale(0.8);
-  transition: 0.5s;
-}
-
-/* floating hearts */
 .heart {
   position: absolute;
-  color: pink;
   font-size: 20px;
   animation: floatUp 5s linear infinite;
 }
@@ -106,7 +87,6 @@ img.main {
   100% { transform: translateY(-10vh); opacity: 0; }
 }
 
-/* confetti */
 .confetti {
   position: absolute;
   width: 8px;
@@ -118,11 +98,6 @@ img.main {
 @keyframes fall {
   0% { transform: translateY(-100vh); }
   100% { transform: translateY(100vh); }
-}
-
-@keyframes fadeIn {
-  from { opacity: 0; transform: translateY(20px); }
-  to { opacity: 1; transform: translateY(0); }
 }
 
 .play-btn {
@@ -156,28 +131,13 @@ img.main {
 
   <img src="IMG_3761.jpeg" class="main">
 
-  <div class="message">
-    🎉 Happy Birthday to the greatest man ❤️ <br>
-    Srinidh 💖 <br><br>
-    You are always vanilla to my brownie 🍫✨ <br>
-    Happy Birthday BAEb 😘 <br><br>
-    I love youuu sooo much 💕 <br>
-    <span class="highlight">I miss you sooo much 🥺❤️</span>
-  </div>
-
-  <div class="decor">
-    <img src="https://media.giphy.com/media/ASd0Ukj0y3qMM/giphy.gif">
-    <img src="https://media.giphy.com/media/l0MYt5jPR6QX5pnqM/giphy.gif">
-    <img src="https://media.giphy.com/media/3oriO0OEd9QIDdllqo/giphy.gif">
-  </div>
-
-  <div id="story">
-    <div class="card">💖 Our Little Love Story 💖</div>
-    <div class="card">Driving with you while I eat ice cream 🍦🚗</div>
-    <div class="card">Watching movies together 🎬💕</div>
-    <div class="card">Chilling with friends 🥰✨</div>
-    <div class="card">Every moment feels like home ❤️</div>
-    <div class="card">I miss you more than words 🥺💖</div>
+  <div id="messages">
+    <div class="message-line">🎉 Happy Birthday to the greatest man ❤️</div>
+    <div class="message-line">Srinidh 💖</div>
+    <div class="message-line">You are always vanilla to my brownie 🍫✨</div>
+    <div class="message-line">Happy Birthday BAEb 😘</div>
+    <div class="message-line">I love youuu sooo much 💕</div>
+    <div class="message-line highlight">I miss you sooo much 🥺❤️</div>
   </div>
 
   <div class="play-btn" id="playPause">⏸</div>
@@ -205,19 +165,19 @@ yesBtn.onclick = () => {
   page1.style.display = "none";
   page2.style.display = "flex";
   music.play();
-  showCards();
+  showMessages();
   createHearts();
   createConfetti();
   showPopup();
 };
 
-function showCards() {
-  const cards = document.querySelectorAll(".card");
-  cards.forEach((card, i) => {
+function showMessages() {
+  const lines = document.querySelectorAll(".message-line");
+  lines.forEach((line, i) => {
     setTimeout(() => {
-      card.style.opacity = 1;
-      card.style.transform = "scale(1)";
-    }, i * 700);
+      line.style.opacity = 1;
+      line.style.transform = "translateY(0)";
+    }, i * 1000);
   });
 }
 
@@ -233,7 +193,7 @@ function createHearts() {
 }
 
 function createConfetti() {
-  for (let i = 0; i < 50; i++) {
+  for (let i = 0; i < 60; i++) {
     let c = document.createElement("div");
     c.classList.add("confetti");
     c.style.left = Math.random() * 100 + "vw";
@@ -257,7 +217,7 @@ function showPopup() {
     popup.style.textAlign = "center";
     document.body.appendChild(popup);
     setTimeout(() => popup.remove(), 4000);
-  }, 5000);
+  }, 7000);
 }
 
 playPause.onclick = () => {
@@ -273,4 +233,3 @@ playPause.onclick = () => {
 
 </body>
 </html>
-
