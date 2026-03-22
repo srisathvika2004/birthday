@@ -4,7 +4,9 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Birthday Surprise ❤️</title>
+
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700&display=swap" rel="stylesheet">
+
 <style>
 body {
   margin: 0;
@@ -24,207 +26,174 @@ body {
 
 h1 {
   color: #ff4d6d;
-  font-size: 26px;
-}
-
-.buttons {
-  margin-top: 20px;
-  position: relative;
 }
 
 button {
-  padding: 12px 22px;
+  padding: 12px 20px;
   border: none;
-  border-radius: 25px;
+  border-radius: 20px;
+  margin: 10px;
   font-size: 16px;
   cursor: pointer;
-  margin: 10px;
-  box-shadow: 0 4px 10px rgba(0,0,0,0.1);
 }
 
 #yesBtn {
-  background-color: #ff85a2;
+  background: #ff85a2;
   color: white;
 }
 
 #noBtn {
-  background-color: #ccc;
+  background: #ccc;
   position: absolute;
 }
 
-.hidden { display: none; }
+.hidden {
+  display: none;
+}
 
 #page2 {
   position: absolute;
-  top: 0;
-  left: 0;
   width: 100%;
   height: 100%;
+  top: 0;
+  left: 0;
   background: linear-gradient(to bottom right, #fff0f5, #e6ffff);
   display: flex;
   flex-direction: column;
-  justify-content: center;
   align-items: center;
+  justify-content: center;
 }
 
 .message {
-  font-size: 24px;
+  font-size: 20px;
   color: #ff4d6d;
-  margin-bottom: 20px;
+  padding: 10px;
+}
+
+img.main {
+  width: 200px;
+  border-radius: 20px;
+  margin-bottom: 15px;
 }
 
 .decor img {
-  width: 80px;
+  width: 70px;
   margin: 5px;
 }
 
-.confetti {
-  position: fixed;
-  width: 8px;
-  height: 8px;
-  background: pink;
-  animation: fall linear infinite;
-}
-
-@keyframes fall {
-  0% { transform: translateY(-100vh); }
-  100% { transform: translateY(100vh); }
-}
-
-.heart {
-  position: fixed;
-  font-size: 20px;
-  animation: floatUp 4s linear infinite;
-}
-
-@keyframes floatUp {
-  0% { transform: translateY(100vh); opacity: 1; }
-  100% { transform: translateY(-10vh); opacity: 0; }
+.card {
+  background: #ffffffaa;
+  padding: 10px;
+  margin: 8px;
+  border-radius: 15px;
+  opacity: 0;
+  transform: translateY(20px);
+  transition: 0.5s;
 }
 </style>
 </head>
+
 <body>
 
 <audio id="music" src="https://www.bensound.com/bensound-music/bensound-romantic.mp3"></audio>
 
+<!-- PAGE 1 -->
 <div class="container" id="page1">
   <h1>Do you wanna see what? 💖</h1>
-  <div class="buttons">
-    <button id="yesBtn">Yes 😍</button>
-    <button id="noBtn">No 🙈</button>
-  </div>
+  <button id="yesBtn">Yes 😍</button>
+  <button id="noBtn">No 🙈</button>
 </div>
 
+<!-- PAGE 2 -->
 <div id="page2" class="hidden">
-  <div class="message">🎉 Happy Birthday to the greatest man ❤️<br> Srinidh 💖<br><br> You are always vanilla to my brownie 🍫✨<br> Happy Birthday BAEb 😘<br><br> I love youuu sooo much 💕<br><br> I miss you sooo much 🥺❤️</div>
-  <div class="decor">
-    <img src="https://media.giphy.com/media/ASd0Ukj0y3qMM/giphy.gif" alt="panda">
-    <img src="https://media.giphy.com/media/l0MYt5jPR6QX5pnqM/giphy.gif" alt="car">
-    <img src="https://media.giphy.com/media/3oriO0OEd9QIDdllqo/giphy.gif" alt="sleeping">
-  </div>
-</div>
 
-<div style="margin-top:20px;color:#555;font-size:16px;padding:10px;text-align:center;">
-  💖 Our Little Love Story 💖<br><br>
-  Us driving together while you handle the wheel and me happily eating ice cream 🍦🚗<br><br>
-  Us watching movies and laughing at the same scenes 🎬💕<br><br>
-  Us chilling with friends and making memories together 🥰✨<br><br>
-  Every moment with you feels like home ❤️<br><br>
-  I miss you more than words can say 🥺💖
+  <img src="IMG_3761.jpeg" class="main">
+
+  <div class="message">
+    🎉 Happy Birthday to the greatest man ❤️ <br>
+    Srinidh 💖 <br><br>
+
+    You are always vanilla to my brownie 🍫✨ <br>
+    Happy Birthday BAEb 😘 <br><br>
+
+    I love youuu sooo much 💕 <br>
+    I miss you sooo much 🥺❤️
+  </div>
+
+  <div class="decor">
+    <img src="https://media.giphy.com/media/ASd0Ukj0y3qMM/giphy.gif">
+    <img src="https://media.giphy.com/media/l0MYt5jPR6QX5pnqM/giphy.gif">
+    <img src="https://media.giphy.com/media/3oriO0OEd9QIDdllqo/giphy.gif">
+  </div>
+
+  <div id="story">
+    <div class="card">💖 Our Little Love Story 💖</div>
+    <div class="card">Driving with you while I eat ice cream 🍦🚗</div>
+    <div class="card">Watching movies together 🎬💕</div>
+    <div class="card">Chilling with friends 🥰✨</div>
+    <div class="card">Every moment feels like home ❤️</div>
+    <div class="card">I miss you more than words 🥺💖</div>
+  </div>
+
 </div>
 
 <script>
-const noBtn = document.getElementById('noBtn');
-const yesBtn = document.getElementById('yesBtn');
-const page1 = document.getElementById('page1');
-const page2 = document.getElementById('page2');
-const music = document.getElementById('music');
+const yesBtn = document.getElementById("yesBtn");
+const noBtn = document.getElementById("noBtn");
+const page1 = document.getElementById("page1");
+const page2 = document.getElementById("page2");
+const music = document.getElementById("music");
 
-noBtn.addEventListener('mouseover', moveButton);
-noBtn.addEventListener('click', moveButton);
-
-function moveButton() {
-  const x = Math.random() * 250 - 125;
-  const y = Math.random() * 250 - 125;
+// moving NO button
+function moveNo() {
+  const x = Math.random() * 200 - 100;
+  const y = Math.random() * 200 - 100;
   noBtn.style.transform = `translate(${x}px, ${y}px)`;
 }
 
-yesBtn.addEventListener('click', () => {
-  page1.classList.add('hidden');
-  page2.classList.remove('hidden');
+noBtn.addEventListener("mouseover", moveNo);
+noBtn.addEventListener("click", moveNo);
+
+// YES click
+yesBtn.onclick = () => {
+  page1.classList.add("hidden");
+  page2.classList.remove("hidden");
   music.play();
-  createConfetti();
-  createHearts();
-});
 
-function createConfetti() {
-  for (let i = 0; i < 80; i++) {
-    let conf = document.createElement('div');
-    conf.classList.add('confetti');
-    conf.style.left = Math.random() * 100 + 'vw';
-    conf.style.animationDuration = (Math.random() * 3 + 2) + 's';
-    document.body.appendChild(conf);
-  }
-}
+  showCards();
+  showPopup();
+};
 
-function createHearts() {
-  setInterval(() => {
-    let heart = document.createElement('div');
-    heart.classList.add('heart');
-    heart.innerHTML = '💖';
-    heart.style.left = Math.random() * 100 + 'vw';
-    document.body.appendChild(heart);
-    setTimeout(() => heart.remove(), 4000);
-  }, 300);
-}
-
-// Cute animation for love story (fade + slide cards)
-const loveStory = document.querySelectorAll('div[style*="Our Little Love Story"]')[0];
-if (loveStory) {
-  const lines = loveStory.innerHTML.split('<br><br>');
-  loveStory.innerHTML = '';
-
-  lines.forEach((line, index) => {
-    const card = document.createElement('div');
-    card.innerHTML = line;
-    card.style.opacity = '0';
-    card.style.transform = 'translateY(20px) scale(0.95)';
-    card.style.transition = 'all 0.6s ease';
-    card.style.background = '#ffffffaa';
-    card.style.padding = '10px 14px';
-    card.style.borderRadius = '14px';
-    card.style.margin = '8px 0';
-    card.style.boxShadow = '0 4px 10px rgba(0,0,0,0.1)';
-    loveStory.appendChild(card);
-
+// animate love story cards
+function showCards() {
+  const cards = document.querySelectorAll(".card");
+  cards.forEach((card, i) => {
     setTimeout(() => {
-      card.style.opacity = '1';
-      card.style.transform = 'translateY(0) scale(1)';
-    }, index * 800);
+      card.style.opacity = 1;
+      card.style.transform = "translateY(0)";
+    }, i * 700);
   });
 }
 
-// Final popup
-function showFinalPopup() {
-  const popup = document.createElement('div');
-  popup.style.position = 'fixed';
-  popup.style.top = '50%';
-  popup.style.left = '50%';
-  popup.style.transform = 'translate(-50%, -50%)';
-  popup.style.background = '#fff0f5';
-  popup.style.padding = '20px';
-  popup.style.borderRadius = '20px';
-  popup.style.boxShadow = '0 4px 15px rgba(0,0,0,0.2)';
-  popup.style.textAlign = 'center';
-  popup.style.zIndex = '1000';
-  popup.innerHTML = "💌 I can't wait to see you again 💖<br>Stay happy always 🥰";
-  document.body.appendChild(popup);
+// final popup
+function showPopup() {
+  setTimeout(() => {
+    const popup = document.createElement("div");
+    popup.innerHTML = "💌 I can't wait to see you again 💖<br>Stay happy always 🥰";
+    popup.style.position = "fixed";
+    popup.style.top = "50%";
+    popup.style.left = "50%";
+    popup.style.transform = "translate(-50%, -50%)";
+    popup.style.background = "#fff0f5";
+    popup.style.padding = "20px";
+    popup.style.borderRadius = "20px";
+    popup.style.boxShadow = "0 4px 10px rgba(0,0,0,0.2)";
+    popup.style.textAlign = "center";
 
-  setTimeout(() => popup.remove(), 4000);
-}
+    document.body.appendChild(popup);
 
-// Trigger popup after few seconds
-setTimeout(showFinalPopup, 5000);, 300);
+    setTimeout(() => popup.remove(), 4000);
+  }, 5000);
 }
 </script>
 
