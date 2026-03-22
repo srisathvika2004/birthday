@@ -47,37 +47,33 @@ button {
 }
 
 img.main {
-  width: 180px;
-  height: 180px;
+  width: 160px;
+  height: 160px;
   border-radius: 50%;
   object-fit: cover;
   border: 4px solid #ff85a2;
-  box-shadow: 0 0 20px #ffb6c1;
-  animation: glow 2s infinite alternate;
-}
-
-@keyframes glow {
-  from { box-shadow: 0 0 10px #ffb6c1; }
-  to { box-shadow: 0 0 25px #ff4d6d; }
+  z-index: 2;
 }
 
 .message-line {
-  font-size: 20px;
+  font-size: 18px;
   color: #ff4d6d;
-  margin: 8px 0;
+  margin: 6px 0;
   opacity: 0;
   transform: translateY(20px);
   transition: 0.8s;
+  z-index: 2;
 }
 
-.highlight {
-  font-weight: bold;
-  color: #ff1493;
-  font-size: 22px;
+.highlight { color: #ff1493; font-weight: bold; }
+
+/* FIX: animations visible */
+.heart, .confetti, .balloon {
+  position: fixed;
+  z-index: 1;
 }
 
 .heart {
-  position: absolute;
   font-size: 20px;
   animation: floatUp 5s linear infinite;
 }
@@ -88,7 +84,6 @@ img.main {
 }
 
 .confetti {
-  position: absolute;
   width: 8px;
   height: 8px;
   background: pink;
@@ -101,7 +96,6 @@ img.main {
 }
 
 .balloon {
-  position: absolute;
   font-size: 24px;
   animation: floatBalloon 6s linear infinite;
 }
@@ -112,19 +106,20 @@ img.main {
 }
 
 .car {
-  position: absolute;
+  position: fixed;
   bottom: 10px;
   font-size: 40px;
-  animation: drive 10s linear infinite;
+  animation: drive 8s linear infinite;
+  z-index: 2;
 }
 
 @keyframes drive {
-  0% { left: -20%; }
+  0% { left: -30%; }
   100% { left: 120%; }
 }
 
 .play-btn {
-  position: absolute;
+  position: fixed;
   bottom: 20px;
   right: 20px;
   background: #ff85a2;
@@ -135,18 +130,18 @@ img.main {
   display: flex;
   justify-content: center;
   align-items: center;
-  font-size: 20px;
+  z-index: 3;
 }
 
 .hug-btn {
-  position: absolute;
+  position: fixed;
   bottom: 20px;
   left: 20px;
   background: #ff4d6d;
   color: white;
   padding: 10px 15px;
   border-radius: 20px;
-  font-size: 14px;
+  z-index: 3;
 }
 </style>
 </head>
@@ -170,12 +165,12 @@ img.main {
     <div class="message-line">Srinidh 💖</div>
     <div class="message-line">You are always vanilla to my brownie 🍫✨</div>
     <div class="message-line">Happy Birthday BAEb 😘</div>
-    <div class="message-line">I love youuu and missing you  💕</div>
-    
+    <div class="message-line">I love youuu sooo much 💕</div>
+    <div class="message-line highlight">I miss you sooo much 🥺❤️</div>
   </div>
 
   <div class="play-btn" id="playPause">⏸</div>
-  <div class="hug-btn" id="hugBtn">🤗 Tap for Hug</div>
+  <div class="hug-btn" id="hugBtn">🤗 Hug</div>
 
   <div class="car">🚗👨‍✈️🍦👩</div>
 
@@ -187,8 +182,6 @@ const noBtn = document.getElementById("noBtn");
 const page1 = document.getElementById("page1");
 const page2 = document.getElementById("page2");
 const music = document.getElementById("music");
-const playPause = document.getElementById("playPause");
-const hugBtn = document.getElementById("hugBtn");
 
 function moveNo() {
   const x = Math.random() * 300 - 150;
@@ -207,91 +200,65 @@ yesBtn.onclick = () => {
   createHearts();
   createConfetti();
   createBalloons();
-  showPopup();
 };
 
 function showMessages() {
-  const lines = document.querySelectorAll(".message-line");
-  lines.forEach((line, i) => {
-    setTimeout(() => {
-      line.style.opacity = 1;
-      line.style.transform = "translateY(0)";
-    }, i * 1000);
+  document.querySelectorAll(".message-line").forEach((el,i)=>{
+    setTimeout(()=>{
+      el.style.opacity=1;
+      el.style.transform='translateY(0)';
+    },i*1000);
   });
 }
 
-function createHearts() {
-  setInterval(() => {
-    let heart = document.createElement("div");
-    heart.classList.add("heart");
-    heart.innerHTML = "💖";
-    heart.style.left = Math.random() * 100 + "vw";
-    document.body.appendChild(heart);
-    setTimeout(() => heart.remove(), 5000);
-  }, 300);
+function createHearts(){
+  setInterval(()=>{
+    let h=document.createElement('div');
+    h.className='heart';
+    h.innerHTML='💖';
+    h.style.left=Math.random()*100+'vw';
+    document.body.appendChild(h);
+    setTimeout(()=>h.remove(),5000);
+  },300);
 }
 
-function createConfetti() {
-  for (let i = 0; i < 60; i++) {
-    let c = document.createElement("div");
-    c.classList.add("confetti");
-    c.style.left = Math.random() * 100 + "vw";
-    c.style.animationDuration = (Math.random() * 3 + 2) + "s";
+function createConfetti(){
+  setInterval(()=>{
+    let c=document.createElement('div');
+    c.className='confetti';
+    c.style.left=Math.random()*100+'vw';
+    c.style.animationDuration=(Math.random()*3+2)+'s';
     document.body.appendChild(c);
-  }
+    setTimeout(()=>c.remove(),5000);
+  },200);
 }
 
-function createBalloons() {
-  setInterval(() => {
-    let b = document.createElement("div");
-    b.classList.add("balloon");
-    b.innerHTML = "🎈";
-    b.style.left = Math.random() * 100 + "vw";
+function createBalloons(){
+  setInterval(()=>{
+    let b=document.createElement('div');
+    b.className='balloon';
+    b.innerHTML='🎈';
+    b.style.left=Math.random()*100+'vw';
     document.body.appendChild(b);
-    setTimeout(() => b.remove(), 6000);
-  }, 800);
+    setTimeout(()=>b.remove(),6000);
+  },600);
 }
 
-function showPopup() {
-  setTimeout(() => {
-    const popup = document.createElement("div");
-    popup.innerHTML = "💌 I can't wait to see you again 💖<br>Stay happy always 🥰";
-    popup.style.position = "fixed";
-    popup.style.top = "50%";
-    popup.style.left = "50%";
-    popup.style.transform = "translate(-50%, -50%)";
-    popup.style.background = "#fff0f5";
-    popup.style.padding = "20px";
-    popup.style.borderRadius = "20px";
-    popup.style.boxShadow = "0 4px 10px rgba(0,0,0,0.2)";
-    popup.style.textAlign = "center";
-    document.body.appendChild(popup);
-    setTimeout(() => popup.remove(), 4000);
-  }, 7000);
-}
-
-hugBtn.onclick = () => {
-  const hug = document.createElement("div");
-  hug.innerHTML = "🤗💖 Sending you the tightest hug!!";
-  hug.style.position = "fixed";
-  hug.style.top = "60%";
-  hug.style.left = "50%";
-  hug.style.transform = "translate(-50%, -50%)";
-  hug.style.background = "#ffe6f0";
-  hug.style.padding = "15px";
-  hug.style.borderRadius = "20px";
+// HUG FIX
+const hugBtn=document.getElementById('hugBtn');
+hugBtn.onclick=()=>{
+  let hug=document.createElement('div');
+  hug.innerHTML='🤗💖 Tight hug for you!!';
+  hug.style.position='fixed';
+  hug.style.top='60%';
+  hug.style.left='50%';
+  hug.style.transform='translate(-50%,-50%)';
+  hug.style.background='#ffe6f0';
+  hug.style.padding='15px';
+  hug.style.borderRadius='20px';
+  hug.style.zIndex='5';
   document.body.appendChild(hug);
-  setTimeout(() => hug.remove(), 3000);
-};
-
-playPause.onclick = () => {
-  if (music.paused) {
-    music.play();
-    playPause.innerHTML = "⏸";
-  } else {
-    music.pause();
-    playPause.innerHTML = "▶";
-  }
+  setTimeout(()=>hug.remove(),3000);
 };
 </script>
 
